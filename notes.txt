@@ -1,0 +1,18 @@
+1. fixing mean blur
+2. apakah fungsi fitting harus dibandingkan dengan target yang asli ?
+3. Desain chromosome untuk gambar bagaimana ?
+  a. Opsi 1 : nilai real, panjang kromosom sesuai dengan panjang row gambar, iterasi ga tiap row, fitting tiap row, baru pindah ke row selanjutnya
+  b. Opsi 2 : nilai real, kromosom merupakan representasi dari semuah box seperti contoh
+  c. Opsi 3 : sama dengan opsi 1, nilai rgb di encode ke binary
+  d. Opsi 4 : sama dengan opsi 2, nilai rgb di encode ke binary
+
+
+4. Desain fungsi fitting
+  a. Dump idea : membandingkan jumlah gen yang nilainya sama pada tiap kromosom dengan gen pada kromosom gambar target, semakin banyak yang sama semakin bagus, sehingga dapat digunakan sebagai parent baru dalam selection dan digunakan untuk crossover dan mutasi
+
+5. Desain selection : roulette wheel atau sistem ranking sesuai dengan nilai fitting ?
+
+
+
+###====== TASK ======###
+1. Fungsi fitness
