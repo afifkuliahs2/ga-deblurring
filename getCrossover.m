@@ -6,9 +6,18 @@ function xover = getCrossover(population)
   pop1x = pop1; % pop1 clone for xover
   pop2x = pop2; % pop2 clone for xover
 
+  % Do masking
+  for i=5:9
+    pop1x(:,i) = bitand(pop1x(:,i),240);
+  end
+
+  for j=1:5
+    pop2x(:,j) = bitand(pop2x(:,j),15);
+  end
+
   % Do crossover
-  pop1x(:, 6:9) = pop2(:, 1:4);
-  pop2x(:, 1:4) = pop1(:, 6:9);
+  pop1x(:, 5:9) = pop2(:, 1:5);
+  pop2x(:, 1:5) = pop1(:, 5:9);
 
   xover = [pop1x; pop2x]; % return xover result;
 end

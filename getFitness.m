@@ -2,5 +2,5 @@
 % return in floating number
 function fitness = getFitness(solution, target)
   restor = mean(solution);
-  fitness = abs(restor-target);
+  fitness = abs(restor-target);  
 end

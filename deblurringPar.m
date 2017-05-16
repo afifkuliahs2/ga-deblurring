@@ -1,7 +1,9 @@
+% TRY OLD DEBLURRING USING MULTI-CORE PROCESSING %
+
 % initPop = initPop / 255; % convert rgb value to floating point
 
 % Set Total Poplation
-popSize = 100;
+popSize = 20;
 
 % read image
 im = imread('cameraman3.tiff'); % original image
@@ -13,8 +15,8 @@ imb = meanBlur(im); % blurred image
 resImg = zeros(x,y);
 
 % ==========================+ %
-tic();
 % Do Genetic Algorithm each Kernel %
+tic();
 for i=1:3:x-2
   for j=1:3:y-2
     i
@@ -28,15 +30,22 @@ for i=1:3:x-2
     while epoc < 300
 
       % calculate fitness for every chromosome for the first time (for initial population)
-      for f=1:popSize
-        fitness(1,f) = getFitness(pop(f,:),degraded);
-      end
+      % for f=1:popSize
+      %   fitness(1,f) = getFitness(pop(f,:),degraded);
+      % end
+
+      fit = @getFitness;
+
+      % Assign loops to 4 cores
+      fitnessR = pararrayfun(4, fit, pop, degraded);
 
       % Do roulette wheel selection
       for r=1:popSize
-        selected = getRoulette(fitness); % get individu
+        selected = getRoulette(fitnessR); % get individu
         pop(r,:) = pop(selected,:); % update population based on selection (as parent)
       end
+
+
 
       % Do crossover on selected parent
       pop = getCrossover(pop); % update population after crossover
