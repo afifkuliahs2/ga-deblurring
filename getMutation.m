@@ -1,3 +1,5 @@
+% @TODO: Try to to do with mutation rate
+
 function mut = getMutation(population)
   row = size(population,1);
   for i=1:row

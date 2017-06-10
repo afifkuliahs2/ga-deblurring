@@ -1,7 +1,7 @@
 % initPop = initPop / 255; % convert rgb value to floating point
 
 % Set Total Poplation
-popSize = 100;
+popSize = 1000;
 
 % read image
 im = imread('cameraman3.tiff'); % original image
@@ -15,8 +15,8 @@ resImg = zeros(x,y);
 % ==========================+ %
 tic();
 % Do Genetic Algorithm each Kernel %
-for i=1:3:x-2
-  for j=1:3:y-2
+for i=1:x-2
+  for j=1:y-2
     i
     j
     pop = generateIndividu(popSize, 9); % Generate Initial Population
@@ -25,7 +25,7 @@ for i=1:3:x-2
     degraded = imb(i+1,j+1); % Get the first kernel
 
     epoc = 0;
-    while epoc < 300
+    while epoc < 100
 
       % calculate fitness for every chromosome for the first time (for initial population)
       for f=1:popSize
