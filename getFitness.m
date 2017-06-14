@@ -6,7 +6,8 @@
 
 function fitness = getFitness(solution, target)
   restor = mean(solution);
-  fitness = abs(restor-target);
+  fitness = getSAD(restor, target);
+  % fitness = abs(restor-target);
   % make most fit value to huge value and otherwise
-  %fitness = 1 / (tmp + 1);
+  % fitness = 1 / (sad + 1);
 end

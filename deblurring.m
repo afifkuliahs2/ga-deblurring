@@ -15,34 +15,36 @@ resImg = zeros(x,y);
 % ==========================+ %
 tic();
 % Do Genetic Algorithm each Kernel %
-for i=1:x-2
-  for j=1:y-2
+for i=1:3:x-2
+  for j=1:3:y-2
     i
     j
     pop = generateIndividu(popSize, 9); % Generate Initial Population
+    selectedPop = zeros(popSize,9);
     % pop = pop ./ 255;
     fitness = zeros(1,popSize); % fitness value holder
     degraded = imb(i+1,j+1); % Get the first kernel
+    degradedrow = [imb(i,j:j+2) imb(i+1, j:j+2) imb(i+2,j:j+2)];
 
     epoc = 0;
     while epoc < 100
 
       % calculate fitness for every chromosome for the first time (for initial population)
-      for f=1:popSize
-        fitness(1,f) = getFitness(pop(f,:),degraded);
+      parfor f=1:popSize
+        fitness(1,f) = getFitness(pop(f,:),degradedrow);
       end
 
       % Do roulette wheel selection
-      for r=1:popSize
+      parfor r=1:popSize
         selected = getRoulette(fitness); % get individu
-        pop(r,:) = pop(selected,:); % update population based on selection (as parent)
+        selectedPop(r,:) = pop(selected,:); % update population based on selection (as parent)
       end
 
       % Do crossover on selected parent
-      pop = getCrossover(pop); % update population after crossover
+      pop = getCrossover(selectedPop); % update population after crossover
 
       % Do Mutation
-      pop = getMutation(pop); % update population after mutation
+      pop = getMutation(selectedPop); % update population after mutation
 
       epoc = epoc + 1;
     end

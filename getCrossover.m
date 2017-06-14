@@ -12,12 +12,12 @@ function xover = getCrossover(population)
   %   pop1x(:,k) = bitand(pop1x(:,k),15);
   % end
 
-  for i=5:9
+  parfor i=5:9
     pop1x(:,i) = bitand(pop1x(:,i),240);
   end
 
   % pop2
-  for j=1:5
+  parfor j=1:5
     pop2x(:,j) = bitand(pop2x(:,j),15);
   end
 
